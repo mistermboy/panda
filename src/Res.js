@@ -10,11 +10,10 @@ var imagenes = {
     bloque_apoyo: "res/bloque_apoyo.png",
     triangulo: "res/triangulo.png",
     pincho: "res/pinchos.png",
+    animacion_saltar_arriba: "res/animacion_saltar_arriba.png",
     animacion_saltar_derecha: "res/animacion_saltar_derecha.png",
     animacion_saltar_abajo: "res/animacion_saltar_abajo.png",
     animacion_saltar_izquierda: "res/animacion_saltar_izquierda.png",
-    animacion_saltar_arriba: "res/animacion_saltar_arriba.png",
-
 };
 
 var rutasImagenes = Object.values(imagenes);

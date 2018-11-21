@@ -13,9 +13,9 @@ class Jugador extends Modelo {
             this.ancho, this.alto, 4, 1, null );
 
         this.saltoDerecha = new Animacion(imagenes.animacion_jugador,
-            this.ancho, this.alto, 4, 4, this.finAnimacionSaltar.bind(this) );
+            this.ancho, this.alto, 1, 7, this.finAnimacionSaltar.bind(this) );
 
-        this.vx = 3; // velocidadX
+        this.vx = 7; // velocidadX
         this.vy = 0; // velocidadY
 
         this.animacion = this.normal;
@@ -33,8 +33,6 @@ class Jugador extends Modelo {
     saltar() {
         if (this.isInTheFloor()) {
             this.vy = -10;
-            this.vx = 10;
-            this.enElAire = true;
             this.animacion = this.saltoDerecha;
         }
     }

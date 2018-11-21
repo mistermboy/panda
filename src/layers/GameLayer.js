@@ -13,7 +13,7 @@ class GameLayer extends Layer {
         this.bloques = [];
 
         this.jugador = new Jugador(50, 50);
-        this.fondo = new Fondo(imagenes.fondo_2,480*0.5,320*0.5);
+        this.fondo = new Fondo(imagenes.fondo,480*0.5,320*0.5);
 
 
         this.cargarMapa("res/"+nivelActual+".txt");
@@ -23,7 +23,7 @@ class GameLayer extends Layer {
     actualizar (){
 
         this.espacio.actualizar();
-        this.fondo.vx = -1;
+        this.fondo.vx = -5;
         this.fondo.actualizar();
         this.jugador.actualizar();
 
@@ -41,8 +41,8 @@ class GameLayer extends Layer {
 
         // limite derecha
         if ( this.jugador.x < this.anchoMapa - 480 * 0.3 ) {
-            if (this.jugador.x - this.scrollX > 480 * 0.7) {
-                this.scrollX = this.jugador.x - 480 * 0.7;
+            if (this.jugador.x - this.scrollX > 480 * 0.4) {
+                this.scrollX = this.jugador.x - 480 * 0.4;
             }
         }
     }
@@ -50,6 +50,7 @@ class GameLayer extends Layer {
     dibujar (){
         this.calcularScroll();
         this.fondo.dibujar();
+
         for (var i=0; i < this.bloques.length; i++){
             this.bloques[i].dibujar(this.scrollX);
         }
@@ -99,7 +100,35 @@ class GameLayer extends Layer {
                 this.espacio.agregarCuerpoDinamico(this.jugador);
                 break;
             case "#":
-                var bloque = new Bloque(imagenes.bloque_tierra, x,y);
+                var suelo = new Bloque(imagenes.suelo, x,y);
+                suelo.y = suelo.y - suelo.alto/2;
+                // modificación para empezar a contar desde el suelo
+                this.bloques.push(suelo);
+                this.espacio.agregarCuerpoEstatico(suelo);
+                break;
+            case "B":
+                var bloque = new Bloque(imagenes.bloque, x,y);
+                bloque.y = bloque.y - bloque.alto/2;
+                // modificación para empezar a contar desde el suelo
+                this.bloques.push(bloque);
+                this.espacio.agregarCuerpoEstatico(bloque);
+                break;
+            case "A":
+                var bloque = new Bloque(imagenes.bloque_apoyo, x,y);
+                bloque.y = bloque.y - bloque.alto/2;
+                // modificación para empezar a contar desde el suelo
+                this.bloques.push(bloque);
+                this.espacio.agregarCuerpoEstatico(bloque);
+                break;
+            case "T":
+                var bloque = new Bloque(imagenes.triangulo, x,y);
+                bloque.y = bloque.y - bloque.alto/2;
+                // modificación para empezar a contar desde el suelo
+                this.bloques.push(bloque);
+                this.espacio.agregarCuerpoEstatico(bloque);
+                break;
+            case "P":
+                var bloque = new Bloque(imagenes.pincho, x,y);
                 bloque.y = bloque.y - bloque.alto/2;
                 // modificación para empezar a contar desde el suelo
                 this.bloques.push(bloque);

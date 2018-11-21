@@ -1,8 +1,12 @@
 
 var imagenes = {
     jugador : "res/jugador.png",
-    fondo_2 : "res/fondo_2.png",
-    bloque_tierra : "res/bloque_metal.png",
+    fondo : "res/fondo.png",
+    suelo : "res/suelo.png",
+    bloque: "res/bloque.png",
+    bloque_apoyo: "res/bloque_apoyo.png",
+    triangulo: "res/triangulo.png",
+    pincho: "res/pinchos.png",
     animacion_jugador: "res/animacion_jugador.png",
     animacion_jugador_derecha: "res/jugador_derecha.png",
 

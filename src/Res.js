@@ -1,10 +1,10 @@
 
 var imagenes = {
     jugador : "res/jugador.png",
-    fondo : "res/fondo.png",
     fondo_2 : "res/fondo_2.png",
-    enemigo_morir : "res/enemigo_morir.png",
     bloque_tierra : "res/bloque_metal.png",
+    animacion_jugador: "res/animacion_jugador.png",
+    animacion_jugador_derecha: "res/jugador_derecha.png",
 
 };
 

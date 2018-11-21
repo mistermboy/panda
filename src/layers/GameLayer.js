@@ -17,6 +17,7 @@ class GameLayer extends Layer {
 
 
         this.cargarMapa("res/"+nivelActual+".txt");
+        this.jugador.senBlocks(this.bloques);
     }
 
     actualizar (){
@@ -24,7 +25,7 @@ class GameLayer extends Layer {
         this.espacio.actualizar();
         this.fondo.vx = -1;
         this.fondo.actualizar();
-       // this.jugador.actualizar();
+        this.jugador.actualizar();
 
 
     }

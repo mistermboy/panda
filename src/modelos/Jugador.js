@@ -20,16 +20,16 @@ class Jugador extends Modelo {
             this.ancho, this.alto, 4, 1, null );
 
         this.saltoDerecha = new Animacion(imagenes.animacion_saltar_derecha,
-            this.ancho, this.alto, -1, 7, this.finAnimacionSaltar.bind(this) );
+            this.ancho, this.alto, 0.1, 7, this.finAnimacionSaltar.bind(this) );
 
         this.saltoAbajo = new Animacion(imagenes.animacion_saltar_abajo,
-            this.ancho, this.alto,-1, 7, this.finAnimacionSaltar.bind(this) );
+            this.ancho, this.alto,0.1, 7, this.finAnimacionSaltar.bind(this) );
 
         this.saltoIzquierda = new Animacion(imagenes.animacion_saltar_izquierda,
-            this.ancho, this.alto, -1, 7, this.finAnimacionSaltar.bind(this) );
+            this.ancho, this.alto, 0.1, 7, this.finAnimacionSaltar.bind(this) );
 
         this.saltoArriba = new Animacion(imagenes.animacion_saltar_arriba,
-            this.ancho, this.alto, -1, 7, this.finAnimacionSaltar.bind(this) );
+            this.ancho, this.alto, 0.1, 7, this.finAnimacionSaltar.bind(this) );
 
 
 
@@ -67,7 +67,7 @@ class Jugador extends Modelo {
 
     saltar() {
         if (this.isInTheFloor()) {
-            this.vy = -12;
+            this.vy = -14;
             this.animacion = this.orientacionesSalto[this.indice];
         }
     }

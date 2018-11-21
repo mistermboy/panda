@@ -7,7 +7,7 @@ class GameLayer extends Layer {
 
     iniciar() {
         //reproducirMusica();
-        this.espacio = new Espacio(1.5);
+        this.espacio = new Espacio(2);
 
         this.scrollX = 0;
         this.bloques = [];

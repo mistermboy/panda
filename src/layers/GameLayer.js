@@ -7,10 +7,11 @@ class GameLayer extends Layer {
 
     iniciar() {
         //reproducirMusica();
-        this.espacio = new Espacio(1);
+        this.espacio = new Espacio(1.5);
 
         this.scrollX = 0;
         this.bloques = [];
+        this.pinchos = [];
 
         this.jugador = new Jugador(50, 50);
         this.fondo = new Fondo(imagenes.fondo,480*0.5,320*0.5);
@@ -26,6 +27,17 @@ class GameLayer extends Layer {
         this.fondo.vx = -5;
         this.fondo.actualizar();
         this.jugador.actualizar();
+
+        for (var i=0; i < this.bloques.length; i++){
+            if (this.jugador.colisionaLateral(this.bloques[i]))
+                this.iniciar();
+        }
+
+        for (var i=0; i < this.pinchos.length; i++) {
+            if (this.jugador.colisiona(this.pinchos[i]))
+                this.iniciar();
+        }
+
 
 
     }
@@ -53,6 +65,10 @@ class GameLayer extends Layer {
 
         for (var i=0; i < this.bloques.length; i++){
             this.bloques[i].dibujar(this.scrollX);
+        }
+
+        for (var i=0; i < this.pinchos.length; i++){
+            this.pinchos[i].dibujar(this.scrollX);
         }
         this.jugador.dibujar(this.scrollX);
     }
@@ -124,14 +140,14 @@ class GameLayer extends Layer {
                 var bloque = new Bloque(imagenes.triangulo, x,y);
                 bloque.y = bloque.y - bloque.alto/2;
                 // modificación para empezar a contar desde el suelo
-                this.bloques.push(bloque);
+                this.pinchos.push(bloque);
                 this.espacio.agregarCuerpoEstatico(bloque);
                 break;
             case "P":
                 var bloque = new Bloque(imagenes.pincho, x,y);
                 bloque.y = bloque.y - bloque.alto/2;
                 // modificación para empezar a contar desde el suelo
-                this.bloques.push(bloque);
+                this.pinchos.push(bloque);
                 this.espacio.agregarCuerpoEstatico(bloque);
                 break;
         }

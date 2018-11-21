@@ -6,19 +6,44 @@ class Jugador extends Modelo {
         this.tiempoInvulnerable = 0;
 
 
-        this.normal = new Animacion(imagenes.jugador,
+        this.arriba = new Animacion(imagenes.jugador_arriba,
             this.ancho, this.alto, 4, 1, null );
 
-        this.derecha = new Animacion(imagenes.animacion_jugador_derecha,
+        this.derecha = new Animacion(imagenes.jugador_derecha,
             this.ancho, this.alto, 4, 1, null );
 
-        this.saltoDerecha = new Animacion(imagenes.animacion_jugador,
-            this.ancho, this.alto, 1, 7, this.finAnimacionSaltar.bind(this) );
+        this.abajo = new Animacion(imagenes.jugador_abajo,
+            this.ancho, this.alto, 4, 1, null );
+
+        this.izquierda = new Animacion(imagenes.jugador_izquierda,
+            this.ancho, this.alto, 4, 1, null );
+
+        this.saltoDerecha = new Animacion(imagenes.animacion_saltar_derecha,
+            this.ancho, this.alto, 4, 1, null );
+
+        this.saltoAbajo = new Animacion(imagenes.animacion_saltar_abajo,
+            this.ancho, this.alto, 4, 1, null );
+
+        this.saltoIzquierda = new Animacion(imagenes.animacion_saltar_izquierda,
+            this.ancho, this.alto, 4, 1, null );
+
+        this.saltoArriba = new Animacion(imagenes.animacion_saltar_arriba,
+            this.ancho, this.alto, -1, 7, this.finAnimacionSaltar.bind(this) );
 
         this.vx = 7; // velocidadX
         this.vy = 0; // velocidadY
 
         this.animacion = this.normal;
+
+        this.orientacionesSalto = [];
+
+        this.orientaciones.push(this.saltoArriba);
+        this.orientaciones.push(this.saltoDerecha);
+        this.orientaciones.push(this.saltoAbajo;
+        this.orientaciones.push(this.saltoIzquierda);
+
+
+        this
 
         this.bloques = [];
 
@@ -32,7 +57,7 @@ class Jugador extends Modelo {
 
     saltar() {
         if (this.isInTheFloor()) {
-            this.vy = -10;
+            this.vy = -12;
             this.animacion = this.saltoDerecha;
         }
     }

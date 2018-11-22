@@ -2,9 +2,6 @@ class Jugador extends Modelo {
 
     constructor(x, y) {
         super(imagenes.jugador_arriba , x, y)
-        this.vidas = 3;
-        this.tiempoInvulnerable = 0;
-
 
         this.arriba = new Animacion(imagenes.jugador_arriba,
             this.ancho, this.alto, 4, 1, null );
@@ -31,6 +28,8 @@ class Jugador extends Modelo {
         this.saltoArriba = new Animacion(imagenes.animacion_saltar_arriba,
             this.ancho, this.alto, 0.1, 7, this.finAnimacionSaltar.bind(this) );
 
+        this.morir = new Animacion(imagenes.animacion_morir,
+            this.ancho, this.alto, 2, 4, this.finAnimacionMorir.bind(this) );
 
 
         this.orientacionesSalto = [];
@@ -54,6 +53,9 @@ class Jugador extends Modelo {
         this.vx = 7; // velocidadX
         this.vy = 0; // velocidadY
         this.bloques = [];
+        this.suelos = [];
+
+        this.estado = estados.abajo;
 
     }
 
@@ -66,8 +68,12 @@ class Jugador extends Modelo {
     }
 
     saltar() {
-        if (this.isInTheFloor()) {
-            this.vy = -18;
+        if (this.isInTheFloor() || this.isInABlock()) {
+
+            if(this.estado == estados.abajo)
+                this.vy = -18;
+            else
+                this.vy = 18;
             this.animacion = this.orientacionesSalto[this.indice];
         }
     }
@@ -91,9 +97,19 @@ class Jugador extends Modelo {
 
     }
 
+    isInABlock(){
+        for(var i=0;i<this.suelos.length;i++){
+            if(this.colisiona(this.suelos[i]))
+                return true;
+        }
+        return false;
 
-    senBlocks(bloques){
+    }
+
+
+    senBlocks(bloques,suelos){
         this.bloques = bloques;
+        this.suelos = suelos;
     }
 
 
@@ -101,14 +117,13 @@ class Jugador extends Modelo {
         this.animacion = this.orientaciones[this.indice++];
     }
 
+    finAnimacionMorir(){
+        estadoJuego = estados.muerto;
+    }
+
+
     golpeado (){
-        if (this.tiempoInvulnerable <= 0) {
-            if (this.vidas > 0) {
-                this.vidas--;
-                this.tiempoInvulnerable = 100;
-                // 100 actualizaciones de loop
-            }
-        }
+       this.animacion = this.morir;
     }
 
 

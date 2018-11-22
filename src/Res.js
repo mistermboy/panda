@@ -20,7 +20,9 @@ var imagenes = {
     animacion_saltar_derecha: "res/animacion_saltar_derecha.png",
     animacion_saltar_abajo: "res/animacion_saltar_abajo.png",
     animacion_saltar_izquierda: "res/animacion_saltar_izquierda.png",
-
+    animacion_morir: "res/jugador_animacion_morir.png",
+    gravity_up: "res/gravity_up.png",
+    gravity_down: "res/gravity_down.png",
 };
 
 var rutasImagenes = Object.values(imagenes);

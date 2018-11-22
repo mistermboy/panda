@@ -12,15 +12,17 @@ class GameLayer extends Layer {
         this.espacio = new Espacio(2.7);
 
         this.scrollX = 0;
+        this.suelos = [];
         this.bloques = [];
         this.pinchos = [];
+        this.gravitys = [];
 
         this.jugador = new Jugador(50, 50);
         this.fondo = new Fondo(imagenes.fondo,480*0.5,320*0.5);
 
 
         this.cargarMapa("res/"+nivelActual+".txt");
-        this.jugador.senBlocks(this.bloques);
+        this.jugador.senBlocks(this.bloques,this.suelos);
     }
 
     actualizar (){
@@ -29,6 +31,14 @@ class GameLayer extends Layer {
             return;
         }
 
+        if(estadoJuego == estados.muerto) {
+            this.iniciar();
+            estadoJuego = estados.moviendo;
+        }
+
+        for (var i=0; i < this.gravitys.length; i++) {
+            this.gravitys[i].actualizar();
+        }
 
         this.espacio.actualizar();
         this.fondo.vx = -5;
@@ -37,13 +47,29 @@ class GameLayer extends Layer {
 
         for (var i=0; i < this.bloques.length; i++){
             if (this.jugador.colisionaLateral(this.bloques[i]))
-                this.iniciar();
+                this.jugador.golpeado();
+
         }
 
         for (var i=0; i < this.pinchos.length; i++) {
             if (this.jugador.colisiona(this.pinchos[i]))
                 this.iniciar();
         }
+
+        for (var i=0; i < this.gravitys.length; i++) {
+            if (this.jugador.colisiona(this.gravitys[i])){
+                this.espacio.gravedad = -1;
+                if(this.jugador.estado == estados.arriba)
+                    this.jugador.estado = estados.abajo;
+                else
+                    this.jugador.estado = estados.arriba;
+
+                this.gravitys.splice(i,1);
+                this.espacio.eliminarCuerpoDinamico(this.gravitys[i]);
+            }
+
+        }
+
 
 
 
@@ -70,6 +96,10 @@ class GameLayer extends Layer {
         this.calcularScroll();
         this.fondo.dibujar();
 
+        for (var i=0; i < this.suelos.length; i++){
+            this.suelos[i].dibujar(this.scrollX);
+        }
+
         for (var i=0; i < this.bloques.length; i++){
             this.bloques[i].dibujar(this.scrollX);
         }
@@ -77,6 +107,11 @@ class GameLayer extends Layer {
         for (var i=0; i < this.pinchos.length; i++){
             this.pinchos[i].dibujar(this.scrollX);
         }
+
+        for (var i=0; i < this.gravitys.length; i++) {
+            this.gravitys[i].dibujar(this.scrollX);
+        }
+
         this.jugador.dibujar(this.scrollX);
 
         if ( this.pausa ) {
@@ -136,7 +171,7 @@ class GameLayer extends Layer {
                 var suelo = new Bloque(imagenes.suelo, x,y);
                 suelo.y = suelo.y - suelo.alto/2;
                 // modificación para empezar a contar desde el suelo
-                this.bloques.push(suelo);
+                this.suelos.push(suelo);
                 this.espacio.agregarCuerpoEstatico(suelo);
                 break;
             case "B":
@@ -166,6 +201,20 @@ class GameLayer extends Layer {
                 // modificación para empezar a contar desde el suelo
                 this.pinchos.push(bloque);
                 this.espacio.agregarCuerpoEstatico(bloque);
+                break;
+            case "U":
+                var bloque = new GravityIcon(imagenes.gravity_up, x,y);
+                bloque.y = bloque.y - bloque.alto/2;
+                // modificación para empezar a contar desde el suelo
+                this.gravitys.push(bloque);
+                this.espacio.agregarCuerpoDinamico(bloque);
+                break;
+            case "D":
+                var bloque = new GravityIcon(imagenes.gravity_down, x,y);
+                bloque.y = bloque.y - bloque.alto/2;
+                // modificación para empezar a contar desde el suelo
+                this.gravitys.push(bloque);
+                this.espacio.agregarCuerpoDinamico(bloque);
                 break;
         }
     }

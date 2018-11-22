@@ -2,12 +2,14 @@ class GameLayer extends Layer {
 
     constructor() {
         super();
+        this.mensaje = new Boton(imagenes.mensaje_como_jugar, 480/2, 320/2);
+        this.pausa = true;
         this.iniciar();
     }
 
     iniciar() {
         //reproducirMusica();
-        this.espacio = new Espacio(2);
+        this.espacio = new Espacio(2.7);
 
         this.scrollX = 0;
         this.bloques = [];
@@ -22,6 +24,11 @@ class GameLayer extends Layer {
     }
 
     actualizar (){
+
+        if (this.pausa){
+            return;
+        }
+
 
         this.espacio.actualizar();
         this.fondo.vx = -5;
@@ -71,11 +78,21 @@ class GameLayer extends Layer {
             this.pinchos[i].dibujar(this.scrollX);
         }
         this.jugador.dibujar(this.scrollX);
+
+        if ( this.pausa ) {
+            this.mensaje.dibujar();
+        }
+
     }
 
 
 
     procesarControles( ){
+
+        if (controles.continuar){
+            controles.continuar = false;
+            this.pausa = false;
+        }
 
 
         if ( controles.barspace > 0 ){

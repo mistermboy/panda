@@ -1,5 +1,11 @@
 
 var imagenes = {
+    boton_jugar : "res/boton_jugar.png",
+    boton_pausa : "res/boton_pausa.png",
+    mensaje_como_jugar : "res/mensaje_como_jugar.png",
+    mensaje_ganar : "res/mensaje_ganar.png",
+    mensaje_perder : "res/mensaje_perder.png",
+    menu_fondo : "res/menu_fondo.png",
     jugador_arriba : "res/jugador_arriba.png",
     jugador_derecha : "res/jugador_derecha.png",
     jugador_abajo : "res/jugador_abajo.png",
@@ -14,6 +20,7 @@ var imagenes = {
     animacion_saltar_derecha: "res/animacion_saltar_derecha.png",
     animacion_saltar_abajo: "res/animacion_saltar_abajo.png",
     animacion_saltar_izquierda: "res/animacion_saltar_izquierda.png",
+
 };
 
 var rutasImagenes = Object.values(imagenes);

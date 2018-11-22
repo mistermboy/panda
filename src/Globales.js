@@ -8,7 +8,8 @@ var entradas = {}; // tipos
 entradas.pulsaciones = 1;
 entradas.teclado = 2;
 entradas.gamepad = 3;
-var entrada = entradas.pulsaciones;
+
+var entrada = entradas.teclado;
 
 
 var nivelActual = 0;

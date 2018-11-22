@@ -67,7 +67,7 @@ class Jugador extends Modelo {
 
     saltar() {
         if (this.isInTheFloor()) {
-            this.vy = -14;
+            this.vy = -18;
             this.animacion = this.orientacionesSalto[this.indice];
         }
     }

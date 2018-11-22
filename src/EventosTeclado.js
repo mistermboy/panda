@@ -13,6 +13,7 @@ function onKeyDown( event) {
         switch (event.keyCode) {
             case 32:
                 controles.barspace = true;
+                controles.continuar = true;
                 break;
         }
     }
@@ -27,6 +28,8 @@ function onKeyUp( event) {
     switch (event.keyCode) {
         case 32:
             controles.barspace = false;
+            controles.continuar = false;
+            break;
     }
 
 }

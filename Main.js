@@ -13,17 +13,9 @@ var controles = {};
 
 // Inicio capas y bucle del juego
 function iniciarJuego() {
-    //gameLayer = new GameLayer();
-    //menuLayer = new MenuLayer();
-    //layer = menuLayer;
 
-
-    //QUITAR PARA MENU
-    gameLayer = new GameLayer();
-    layer = gameLayer;
-
-
-
+    menuLayer = new MenuLayer();
+    layer = menuLayer;
     setInterval(loop, 1000 / 30);
 }
 

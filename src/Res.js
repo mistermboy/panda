@@ -13,7 +13,6 @@ var imagenes = {
     fondo : "res/fondo.png",
     suelo : "res/suelo.png",
     bloque: "res/bloque.png",
-    bloque_apoyo: "res/bloque_apoyo.png",
     triangulo: "res/triangulo.png",
     pincho: "res/pinchos.png",
     animacion_saltar_arriba: "res/animacion_saltar_arriba.png",

@@ -50,7 +50,7 @@ class Jugador extends Modelo {
 
         this.animacion = this.arriba;
 
-        this.vx = 7; // velocidadX
+        this.vx = 10; // velocidadX
         this.vy = 0; // velocidadY
         this.bloques = [];
         this.suelos = [];

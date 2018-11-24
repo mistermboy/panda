@@ -9,7 +9,7 @@ class GameLayer extends Layer {
 
     iniciar() {
         //reproducirMusica();
-        this.espacio = new Espacio(2.7);
+        this.espacio = new Espacio(1.5);
 
         this.scrollX = 0;
         this.suelos = [];
@@ -33,7 +33,7 @@ class GameLayer extends Layer {
 
         if(estadoJuego == estados.muerto) {
             this.iniciar();
-            estadoJuego = estados.moviendo;
+            estadoJuego = estados.abajo;
         }
 
         for (var i=0; i < this.gravitys.length; i++) {
@@ -176,13 +176,6 @@ class GameLayer extends Layer {
                 break;
             case "B":
                 var bloque = new Bloque(imagenes.bloque, x,y);
-                bloque.y = bloque.y - bloque.alto/2;
-                // modificación para empezar a contar desde el suelo
-                this.bloques.push(bloque);
-                this.espacio.agregarCuerpoEstatico(bloque);
-                break;
-            case "A":
-                var bloque = new Bloque(imagenes.bloque_apoyo, x,y);
                 bloque.y = bloque.y - bloque.alto/2;
                 // modificación para empezar a contar desde el suelo
                 this.bloques.push(bloque);

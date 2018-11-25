@@ -61,19 +61,34 @@ class Jugador extends Modelo {
 
 
     actualizar(){
+
         this.animacion.actualizar();
 
-        if(this.indice == 4)
+        if (this.indice == 4)
             this.indice = 0;
+
+        if ( this.estado == estados.muriendo) {
+            this.animacion = this.morir;
+            this.vx = 0;
+        }else
+            this.vx = 10;
+
+
+
+
+
+
+
     }
 
     saltar() {
-        if (this.isInTheFloor() || this.isInABlock()) {
+        if ( this.isNotDead() && (this.isInTheFloor() || this.isInABlock())) {
 
             if(this.estado == estados.abajo)
-                this.vy = -18;
+                this.vy = -23;
             else
-                this.vy = 18;
+                this.vy = 23;
+
             this.animacion = this.orientacionesSalto[this.indice];
         }
     }
@@ -118,13 +133,22 @@ class Jugador extends Modelo {
     }
 
     finAnimacionMorir(){
-        estadoJuego = estados.muerto;
+        this.estado = estados.muerto;
     }
 
 
     golpeado (){
-       this.animacion = this.morir;
+        if ( this.isNotDead() ){
+            this.estado = estados.muriendo;
+        }
     }
 
+    isNotDead(){
+         return this.estado!=estados.muriendo && this.estado!=estados.muerto ? true:false;
+    }
+
+    isDead(){
+        return this.estado== estados.muerto ? true:false;
+    }
 
 }

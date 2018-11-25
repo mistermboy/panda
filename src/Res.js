@@ -14,6 +14,7 @@ var imagenes = {
     suelo : "res/suelo.png",
     bloque: "res/bloque.png",
     triangulo: "res/triangulo.png",
+    triangulo_apoyo: "res/triangulo_apoyo.png",
     pincho: "res/pinchos.png",
     animacion_saltar_arriba: "res/animacion_saltar_arriba.png",
     animacion_saltar_derecha: "res/animacion_saltar_derecha.png",

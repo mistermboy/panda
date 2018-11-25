@@ -1,6 +1,6 @@
 class Espacio {
 
-    constructor(gravedad) {
+     constructor(gravedad) {
         this.gravedad = gravedad;
         this.dinamicos = [];
         this.estaticos = [];

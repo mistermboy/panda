@@ -22,7 +22,8 @@ cuerpo.estatico = 2;
 var estados = {};
 estados.abajo= 2;
 estados.arriba = 3;
-estados.muerto = 4;
+estados.muriendo = 4;
+estados.muerto = 5;
 
 
 var orientaciones = {};

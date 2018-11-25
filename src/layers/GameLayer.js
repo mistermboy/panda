@@ -9,7 +9,7 @@ class GameLayer extends Layer {
 
     iniciar() {
         //reproducirMusica();
-        this.espacio = new Espacio(1.5);
+        this.espacio = new Espacio(2.7);
 
         this.scrollX = 0;
         this.suelos = [];
@@ -23,6 +23,7 @@ class GameLayer extends Layer {
 
         this.cargarMapa("res/"+nivelActual+".txt");
         this.jugador.senBlocks(this.bloques,this.suelos);
+
     }
 
     actualizar (){
@@ -31,10 +32,10 @@ class GameLayer extends Layer {
             return;
         }
 
-        if(estadoJuego == estados.muerto) {
+        if(this.jugador.isDead()) {
             this.iniciar();
-            estadoJuego = estados.abajo;
         }
+
 
         for (var i=0; i < this.gravitys.length; i++) {
             this.gravitys[i].actualizar();
@@ -46,14 +47,15 @@ class GameLayer extends Layer {
         this.jugador.actualizar();
 
         for (var i=0; i < this.bloques.length; i++){
-            if (this.jugador.colisionaLateral(this.bloques[i]))
-                this.jugador.golpeado();
+            if (this.jugador.colisiona(this.bloques[i]))
+                if (this.jugador.colisionaLateral(this.bloques[i]))
+                    this.jugador.golpeado();
 
         }
 
         for (var i=0; i < this.pinchos.length; i++) {
             if (this.jugador.colisiona(this.pinchos[i]))
-                this.iniciar();
+                this.jugador.golpeado();
         }
 
         for (var i=0; i < this.gravitys.length; i++) {
@@ -183,6 +185,13 @@ class GameLayer extends Layer {
                 break;
             case "T":
                 var bloque = new Bloque(imagenes.triangulo, x,y);
+                bloque.y = bloque.y - bloque.alto/2;
+                // modificación para empezar a contar desde el suelo
+                this.pinchos.push(bloque);
+                this.espacio.agregarCuerpoEstatico(bloque);
+                break;
+            case "A":
+                var bloque = new Bloque(imagenes.triangulo_apoyo, x,y);
                 bloque.y = bloque.y - bloque.alto/2;
                 // modificación para empezar a contar desde el suelo
                 this.pinchos.push(bloque);

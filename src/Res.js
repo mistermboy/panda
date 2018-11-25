@@ -23,6 +23,7 @@ var imagenes = {
     animacion_morir: "res/jugador_animacion_morir.png",
     gravity_up: "res/gravity_up.png",
     gravity_down: "res/gravity_down.png",
+    nave: "res/nave_parpadeo.png",
 };
 
 var rutasImagenes = Object.values(imagenes);

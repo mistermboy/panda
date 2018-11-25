@@ -67,15 +67,21 @@ class Jugador extends Modelo {
         if (this.indice == 4)
             this.indice = 0;
 
-        if ( this.estado == estados.muriendo) {
-            this.animacion = this.morir;
-            this.vx = 0;
-        }else
-            this.vx = 10;
+        switch(this.estado){
 
+            case estados.muriendo:
+                this.animacion = this.morir;
+                this.vx = 0;
+                break;
+            case estados.volando:
+                this.vx = 10;
+                break;
 
+            default:
+                this.vx = 10;
+                break;
 
-
+        }
 
 
 
@@ -92,7 +98,6 @@ class Jugador extends Modelo {
             this.animacion = this.orientacionesSalto[this.indice];
         }
     }
-
 
 
     dibujar (scrollX){
@@ -149,6 +154,10 @@ class Jugador extends Modelo {
 
     isDead(){
         return this.estado== estados.muerto ? true:false;
+    }
+
+    volar (direccion){
+        this.vy = direccion * 10;
     }
 
 }

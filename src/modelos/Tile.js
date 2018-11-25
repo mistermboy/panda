@@ -1,10 +1,10 @@
-class GravityIcon extends Modelo {
+class Tile extends Modelo {
 
-    constructor(rutaImagen, x, y) {
+    constructor(rutaImagen, x, y, velocidadRefresco, framesTotales) {
         super(rutaImagen, x, y)
 
         this.animacion = new Animacion(rutaImagen,
-            this.ancho, this.alto, 2, 3, null );
+            this.ancho, this.alto,  velocidadRefresco, framesTotales, null );
 
     }
 

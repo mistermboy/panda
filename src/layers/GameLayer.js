@@ -16,6 +16,7 @@ class GameLayer extends Layer {
         this.bloques = [];
         this.pinchos = [];
         this.gravitys = [];
+        this.naves = [];
 
         this.jugador = new Jugador(50, 50);
         this.fondo = new Fondo(imagenes.fondo,480*0.5,320*0.5);
@@ -41,6 +42,11 @@ class GameLayer extends Layer {
             this.gravitys[i].actualizar();
         }
 
+        for (var i=0; i < this.naves.length; i++) {
+            this.naves[i].actualizar();
+        }
+
+
         this.espacio.actualizar();
         this.fondo.vx = -5;
         this.fondo.actualizar();
@@ -56,6 +62,11 @@ class GameLayer extends Layer {
         for (var i=0; i < this.pinchos.length; i++) {
             if (this.jugador.colisiona(this.pinchos[i]))
                 this.jugador.golpeado();
+        }
+
+        for (var i=0; i < this.naves.length; i++) {
+            if (this.jugador.colisiona(this.naves[i]))
+                this.jugador.estado = estados.volando;
         }
 
         for (var i=0; i < this.gravitys.length; i++) {
@@ -114,6 +125,10 @@ class GameLayer extends Layer {
             this.gravitys[i].dibujar(this.scrollX);
         }
 
+        for (var i=0; i < this.naves.length; i++) {
+            this.naves[i].dibujar(this.scrollX);
+        }
+
         this.jugador.dibujar(this.scrollX);
 
         if ( this.pausa ) {
@@ -133,7 +148,19 @@ class GameLayer extends Layer {
 
 
         if ( controles.barspace > 0 ){
-            this.jugador.saltar();
+
+            switch (this.jugador.estado) {
+
+                case estados.volando:
+                    this.jugador.volar(-1);
+                    break;
+
+                default:
+                    this.jugador.saltar();
+                    break;
+
+            }
+
         }
     }
 
@@ -205,17 +232,24 @@ class GameLayer extends Layer {
                 this.espacio.agregarCuerpoEstatico(bloque);
                 break;
             case "U":
-                var bloque = new GravityIcon(imagenes.gravity_up, x,y);
+                var bloque = new Tile(imagenes.gravity_up, x,y,2,3);
                 bloque.y = bloque.y - bloque.alto/2;
                 // modificación para empezar a contar desde el suelo
                 this.gravitys.push(bloque);
                 this.espacio.agregarCuerpoDinamico(bloque);
                 break;
             case "D":
-                var bloque = new GravityIcon(imagenes.gravity_down, x,y);
+                var bloque = new Tile(imagenes.gravity_down, x,y,2,3);
                 bloque.y = bloque.y - bloque.alto/2;
                 // modificación para empezar a contar desde el suelo
                 this.gravitys.push(bloque);
+                this.espacio.agregarCuerpoDinamico(bloque);
+                break;
+            case "N":
+                var bloque = new Tile(imagenes.nave, x,y,2,3);
+                bloque.y = bloque.y - bloque.alto/2;
+                // modificación para empezar a contar desde el suelo
+                this.naves.push(bloque);
                 this.espacio.agregarCuerpoDinamico(bloque);
                 break;
         }

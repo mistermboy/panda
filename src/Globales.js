@@ -22,12 +22,13 @@ cuerpo.estatico = 2;
 var estados = {};
 estados.abajo= 2;
 estados.arriba = 3;
-estados.muriendo = 4;
-estados.muerto = 5;
+estados.volando = 4;
+estados.muriendo = 5;
+estados.muerto = 6;
 
 
 var orientaciones = {};
 orientaciones.derecha = 2;
 orientaciones.izquierda = 3;
 
-var estadoJuego = estados.abajo;
+

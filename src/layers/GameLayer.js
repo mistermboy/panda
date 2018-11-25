@@ -48,7 +48,7 @@ class GameLayer extends Layer {
 
 
         this.espacio.actualizar();
-        this.fondo.vx = -5;
+        this.fondo.vx = -2;
         this.fondo.actualizar();
         this.jugador.actualizar();
 
@@ -219,6 +219,13 @@ class GameLayer extends Layer {
                 break;
             case "A":
                 var bloque = new Bloque(imagenes.triangulo_apoyo, x,y);
+                bloque.y = bloque.y - bloque.alto/2;
+                // modificación para empezar a contar desde el suelo
+                this.pinchos.push(bloque);
+                this.espacio.agregarCuerpoEstatico(bloque);
+                break;
+            case "V":
+                var bloque = new Bloque(imagenes.triangulo_volteado, x,y);
                 bloque.y = bloque.y - bloque.alto/2;
                 // modificación para empezar a contar desde el suelo
                 this.pinchos.push(bloque);

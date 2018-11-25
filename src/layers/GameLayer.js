@@ -252,6 +252,13 @@ class GameLayer extends Layer {
                 this.gravitys.push(bloque);
                 this.espacio.agregarCuerpoDinamico(bloque);
                 break;
+            case "O":
+                var bloque = new Tile(imagenes.bloque_apoyo, x,y,2,3);
+                bloque.y = bloque.y - bloque.alto/2;
+                // modificación para empezar a contar desde el suelo
+                this.bloques.push(bloque);
+                this.espacio.agregarCuerpoDinamico(bloque);
+                break;
             case "N":
                 var bloque = new Tile(imagenes.nave, x,y,2,3);
                 bloque.y = bloque.y - bloque.alto/2;

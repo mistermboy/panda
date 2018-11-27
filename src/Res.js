@@ -26,6 +26,8 @@ var imagenes = {
     gravity: "res/gravity.png",
     nave: "res/nave_parpadeo.png",
     animacion_volar: "res/animacion_volar.png",
+    animacion_pincho: "res/animacion_pincho.png",
+    animacion_deslizar: "res/animacion_deslizar.png",
 };
 
 var rutasImagenes = Object.values(imagenes);

@@ -35,6 +35,8 @@ class Jugador extends Modelo {
         this.AVolar = new Animacion(imagenes.animacion_volar,
             this.ancho, this.alto, 2, 6, null );
 
+        this.AGravedad = new Animacion(imagenes.animacion_pincho,
+            this.ancho, this.alto, 2, 3, null );
 
         this.orientacionesSalto = [];
         this.orientaciones = [];
@@ -81,8 +83,11 @@ class Jugador extends Modelo {
                 this.animacion = this.AVolar;
                 this.vx = 10;
                 break;
-
-            default:
+            case estados.gravitatorio:
+                this.animacion = this.AGravedad;
+                this.vx = 10;
+                break;
+            case estados.deslizandose:
                 this.vx = 10;
                 break;
 

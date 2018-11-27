@@ -17,6 +17,7 @@ class GameLayer extends Layer {
         this.pinchos = [];
         this.gravitys = [];
         this.naves = [];
+        this.deslizables = [];
 
         this.jugador = new Jugador(50, 50);
         this.fondo = new Fondo(imagenes.fondo,480*0.5,320*0.5);
@@ -48,6 +49,9 @@ class GameLayer extends Layer {
             this.naves[i].actualizar();
         }
 
+        for (var i=0; i < this.deslizables.length; i++) {
+            this.deslizables[i].actualizar();
+        }
 
         this.espacio.actualizar();
         this.fondo.vx = -2;
@@ -92,8 +96,16 @@ class GameLayer extends Layer {
 
         }
 
-        //this.jugador.estado = estados.deslizandose;
-        //this.jugador.cubo();
+        for (var i=0; i < this.deslizables.length; i++) {
+            if (this.jugador.colisiona(this.deslizables[i])) {
+                this.espacio.gravedad = 2.7;
+                this.jugador.estado = estados.deslizandose;
+                this.jugador.cubo();
+                this.deslizables.splice(i, 1);
+                this.espacio.eliminarCuerpoDinamico(this.deslizables[i]);
+            }
+        }
+
 
 
 
@@ -139,6 +151,10 @@ class GameLayer extends Layer {
 
         for (var i=0; i < this.naves.length; i++) {
             this.naves[i].dibujar(this.scrollX);
+        }
+
+        for (var i=0; i < this.deslizables.length; i++) {
+            this.deslizables[i].dibujar(this.scrollX);
         }
 
         this.jugador.dibujar(this.scrollX);
@@ -270,6 +286,13 @@ class GameLayer extends Layer {
                 bloque.y = bloque.y - bloque.alto/2;
                 // modificación para empezar a contar desde el suelo
                 this.naves.push(bloque);
+                this.espacio.agregarCuerpoDinamico(bloque);
+                break;
+            case "D":
+                var bloque = new Tile(imagenes.animacion_deslizar, x,y,2,3);
+                bloque.y = bloque.y - bloque.alto/2;
+                // modificación para empezar a contar desde el suelo
+                this.deslizables.push(bloque);
                 this.espacio.agregarCuerpoDinamico(bloque);
                 break;
         }

@@ -268,7 +268,7 @@ class GameLayer extends Layer {
                 this.espacio.agregarCuerpoEstatico(bloque);
                 break;
             case "G":
-                var bloque = new Tile(imagenes.gravity, x,y,2,2);
+                var bloque = new Tile(imagenes.gravity, x,y,2,3);
                 bloque.y = bloque.y - bloque.alto/2;
                 // modificación para empezar a contar desde el suelo
                 this.gravitys.push(bloque);
@@ -289,7 +289,7 @@ class GameLayer extends Layer {
                 this.espacio.agregarCuerpoDinamico(bloque);
                 break;
             case "D":
-                var bloque = new Tile(imagenes.animacion_deslizar, x,y,2,3);
+                var bloque = new Tile(imagenes.animacion_deslizar, x,y,2,2);
                 bloque.y = bloque.y - bloque.alto/2;
                 // modificación para empezar a contar desde el suelo
                 this.deslizables.push(bloque);

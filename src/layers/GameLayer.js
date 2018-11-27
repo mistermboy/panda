@@ -60,8 +60,10 @@ class GameLayer extends Layer {
 
 
         for (var i=0; i < this.suelos.length; i++) {
-            if (this.jugador.colisiona(this.suelos[i]))
+            if (this.jugador.colisiona(this.suelos[i])) {
                 this.canChange = true;
+                this.jugador.vy = 0;
+            }
         }
 
 

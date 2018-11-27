@@ -20,15 +20,14 @@ cuerpo.dinamico = 1;
 cuerpo.estatico = 2;
 
 var estados = {};
-estados.abajo= 2;
-estados.arriba = 3;
-estados.volando = 4;
-estados.muriendo = 5;
-estados.muerto = 6;
+estados.deslizandose = 1;
+estados.gravitatorio = 2;
+estados.volando = 3;
+estados.muriendo = 4;
+estados.muerto = 5;
 
 
 var orientaciones = {};
 orientaciones.derecha = 2;
 orientaciones.izquierda = 3;
-
 

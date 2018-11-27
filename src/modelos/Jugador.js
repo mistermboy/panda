@@ -32,6 +32,10 @@ class Jugador extends Modelo {
             this.ancho, this.alto, 2, 4, this.finAnimacionMorir.bind(this) );
 
 
+        this.AVolar = new Animacion(imagenes.animacion_volar,
+            this.ancho, this.alto, 2, 6, null );
+
+
         this.orientacionesSalto = [];
         this.orientaciones = [];
 
@@ -55,7 +59,7 @@ class Jugador extends Modelo {
         this.bloques = [];
         this.suelos = [];
 
-        this.estado = estados.abajo;
+        this.estado = estados.deslizandose;
 
     }
 
@@ -74,6 +78,7 @@ class Jugador extends Modelo {
                 this.vx = 0;
                 break;
             case estados.volando:
+                this.animacion = this.AVolar;
                 this.vx = 10;
                 break;
 
@@ -89,12 +94,7 @@ class Jugador extends Modelo {
 
     saltar() {
         if ( this.isNotDead() && (this.isInTheFloor() || this.isInABlock())) {
-
-            if(this.estado == estados.abajo)
-                this.vy = -23;
-            else
-                this.vy = 23;
-
+            this.vy = -23;
             this.animacion = this.orientacionesSalto[this.indice];
         }
     }
@@ -159,5 +159,10 @@ class Jugador extends Modelo {
     volar (direccion){
         this.vy = direccion * 10;
     }
+
+    cubo(){
+        this.animacion = this.arriba;
+    }
+
 
 }

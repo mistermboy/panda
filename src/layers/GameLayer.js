@@ -25,6 +25,8 @@ class GameLayer extends Layer {
         this.cargarMapa("res/"+nivelActual+".txt");
         this.jugador.senBlocks(this.bloques,this.suelos);
 
+        this.canChange = true;
+
     }
 
     actualizar (){
@@ -52,10 +54,19 @@ class GameLayer extends Layer {
         this.fondo.actualizar();
         this.jugador.actualizar();
 
+
+        for (var i=0; i < this.suelos.length; i++) {
+            if (this.jugador.colisiona(this.suelos[i]))
+                this.canChange = true;
+        }
+
+
         for (var i=0; i < this.bloques.length; i++){
-            if (this.jugador.colisiona(this.bloques[i]))
+            if (this.jugador.colisiona(this.bloques[i])) {
+                this.canChange = true;
                 if (this.jugador.colisionaLateral(this.bloques[i]))
                     this.jugador.golpeado();
+            }
 
         }
 
@@ -65,23 +76,24 @@ class GameLayer extends Layer {
         }
 
         for (var i=0; i < this.naves.length; i++) {
-            if (this.jugador.colisiona(this.naves[i]))
+            if (this.jugador.colisiona(this.naves[i])) {
                 this.jugador.estado = estados.volando;
+                this.naves.splice(i,1);
+            }
         }
 
         for (var i=0; i < this.gravitys.length; i++) {
             if (this.jugador.colisiona(this.gravitys[i])){
-                this.espacio.gravedad = -1;
-                if(this.jugador.estado == estados.arriba)
-                    this.jugador.estado = estados.abajo;
-                else
-                    this.jugador.estado = estados.arriba;
-
+                this.jugador.estado = estados.gravitatorio;
+                this.espacio.gravedad = 1;
                 this.gravitys.splice(i,1);
                 this.espacio.eliminarCuerpoDinamico(this.gravitys[i]);
             }
 
         }
+
+        //this.jugador.estado = estados.deslizandose;
+        //this.jugador.cubo();
 
 
 
@@ -148,13 +160,14 @@ class GameLayer extends Layer {
 
 
         if ( controles.barspace > 0 ){
-
             switch (this.jugador.estado) {
 
                 case estados.volando:
                     this.jugador.volar(-1);
                     break;
-
+                case estados.gravitatorio:
+                    this.cambiarGravedad();
+                    break;
                 default:
                     this.jugador.saltar();
                     break;
@@ -238,15 +251,8 @@ class GameLayer extends Layer {
                 this.pinchos.push(bloque);
                 this.espacio.agregarCuerpoEstatico(bloque);
                 break;
-            case "U":
-                var bloque = new Tile(imagenes.gravity_up, x,y,2,3);
-                bloque.y = bloque.y - bloque.alto/2;
-                // modificación para empezar a contar desde el suelo
-                this.gravitys.push(bloque);
-                this.espacio.agregarCuerpoDinamico(bloque);
-                break;
-            case "D":
-                var bloque = new Tile(imagenes.gravity_down, x,y,2,3);
+            case "G":
+                var bloque = new Tile(imagenes.gravity, x,y,2,2);
                 bloque.y = bloque.y - bloque.alto/2;
                 // modificación para empezar a contar desde el suelo
                 this.gravitys.push(bloque);
@@ -266,6 +272,14 @@ class GameLayer extends Layer {
                 this.naves.push(bloque);
                 this.espacio.agregarCuerpoDinamico(bloque);
                 break;
+        }
+    }
+
+    cambiarGravedad(){
+
+        if(this.canChange) {
+            this.espacio.gravedad = this.espacio.gravedad * -1;
+            this.canChange = false;
         }
     }
 

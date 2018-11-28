@@ -40,6 +40,17 @@ class GameLayer extends Layer {
             this.iniciar();
         }
 
+        if ( this.copa.colisiona(this.jugador)){
+            nivelActual++;
+            if (nivelActual > nivelMaximo){
+                nivelActual = 0;
+            }
+            this.pausa = true;
+            this.mensaje =
+                new Boton(imagenes.mensaje_ganar, 480/2, 320/2);
+            this.iniciar();
+        }
+
 
         for (var i=0; i < this.gravitys.length; i++) {
             this.gravitys[i].actualizar();
@@ -296,6 +307,13 @@ class GameLayer extends Layer {
                 // modificación para empezar a contar desde el suelo
                 this.deslizables.push(bloque);
                 this.espacio.agregarCuerpoDinamico(bloque);
+                break;
+
+            case "C":
+                this.copa = new Bloque(imagenes.copa, x,y);
+                this.copa.y = this.copa.y - this.copa.alto/2;
+                // modificación para empezar a contar desde el suelo
+                this.espacio.agregarCuerpoDinamico(this.copa);
                 break;
         }
     }

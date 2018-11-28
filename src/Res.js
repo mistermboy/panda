@@ -28,6 +28,7 @@ var imagenes = {
     animacion_volar: "res/animacion_volar.png",
     animacion_pincho: "res/animacion_pincho.png",
     animacion_deslizar: "res/animacion_deslizar.png",
+    copa: "res/copa.png",
 };
 
 var rutasImagenes = Object.values(imagenes);

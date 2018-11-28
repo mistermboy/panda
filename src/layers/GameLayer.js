@@ -8,7 +8,7 @@ class GameLayer extends Layer {
     }
 
     iniciar() {
-        //reproducirMusica();
+
         this.espacio = new Espacio(2.7);
 
         this.scrollX = 0;
@@ -45,6 +45,7 @@ class GameLayer extends Layer {
             if (nivelActual > nivelMaximo){
                 nivelActual = 0;
             }
+            pararMusica();
             this.pausa = true;
             this.mensaje =
                 new Boton(imagenes.mensaje_ganar, 480/2, 320/2);
@@ -185,6 +186,7 @@ class GameLayer extends Layer {
         if (controles.continuar){
             controles.continuar = false;
             this.pausa = false;
+            reproducirMusica();
         }
 
 

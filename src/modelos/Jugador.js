@@ -150,6 +150,8 @@ class Jugador extends Modelo {
     golpeado (){
         if ( this.isNotDead() ){
             this.estado = estados.muriendo;
+            reproducirEfecto(efectos.muerte);
+            reiniciarMusica();
         }
     }
 

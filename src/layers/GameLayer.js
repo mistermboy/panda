@@ -46,10 +46,13 @@ class GameLayer extends Layer {
                 nivelActual = 0;
             }
             pararMusica();
+
             this.pausa = true;
             this.mensaje =
                 new Boton(imagenes.mensaje_ganar, 480/2, 320/2);
             this.iniciar();
+
+            this.jugador.matar();
         }
 
 

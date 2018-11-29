@@ -172,4 +172,12 @@ class Jugador extends Modelo {
     }
 
 
+    /**
+     * Este método corrige un bug visual al cambiar de nivel si no has muerto. Fuerza al jugador a morir
+     */
+    matar (){
+            this.estado = estados.muerto;
+            pararMusica();
+    }
+
 }

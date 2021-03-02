@@ -15,5 +15,14 @@ window.onload = function(){
         rightPupil.style.left= left
 
       });
+    
+     setTimeout(()=>{
+          document.getElementById('leftEyebrow').style.display = 'inline';
+          document.getElementById('rightEyebrow').style.display = 'inline';
+          //document.getElementById('fire').style.visibility = 'visible';
+          document.getElementById('leftEyeIris').style.backgroundImage='radial-gradient(rgb(255,80,0) 20%, rgba(255,80,0,0) 100%)';
+          document.getElementById('rightEyeIris').style.backgroundImage='radial-gradient(rgb(255,80,0) 20%, rgba(255,80,0,0) 100%)';
+        },5000)
+    
 
     }
